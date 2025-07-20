@@ -7,7 +7,6 @@ import { useSession } from "next-auth/react";
 
 export default function SearchWidget() {
   const { data: session } = useSession();
-  console.log(session);
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const searchRef = useRef<HTMLDivElement>(null);
@@ -40,7 +39,6 @@ export default function SearchWidget() {
 
   return (
     <div className="relative" ref={searchRef}>
-      {/* Search Input */}
       <div
         className="flex items-center bg-muted/80 backdrop-blur-sm rounded-md px-3 py-2 min-w-72 cursor-text hover:bg-muted transition-all duration-200 border border-border"
         onClick={() => setIsOpen(true)}
@@ -51,18 +49,14 @@ export default function SearchWidget() {
         </span>
       </div>
 
-      {/* Start Menu Panel */}
       {isOpen && (
         <>
-          {/* Backdrop */}
           <div
             className="fixed inset-0 z-40"
             onClick={() => setIsOpen(false)}
           />
 
-          {/* Panel positioned relative to search input */}
           <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-[600px] bg-background/95 backdrop-blur-xl rounded-lg border border-border shadow-2xl z-50 overflow-hidden">
-            {/* Search Header */}
             <div className="p-4 border-b border-border">
               <div className="flex items-center bg-muted/50 rounded-md px-3 py-2 border border-border">
                 <Search className="w-4 h-4 text-muted-foreground mr-2" />
@@ -129,7 +123,9 @@ export default function SearchWidget() {
                 <div className="w-7 h-7 bg-primary rounded-full flex items-center justify-center">
                   <User className="w-4 h-4 text-primary-foreground" />
                 </div>
-                {/* <span className="text-foreground text-sm">{session.user}</span> */}
+                <span className="text-foreground text-sm">
+                  {session?.user?.name}
+                </span>
               </div>
 
               {/* Power Button */}
