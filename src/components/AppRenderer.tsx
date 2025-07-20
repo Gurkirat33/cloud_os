@@ -66,7 +66,7 @@ export default function AppRenderer() {
                 </button>
               </div>
               <p className="text-muted-foreground">
-                This app doesn't have a component implemented yet.
+                This app doesn&apos;t have a component implemented yet.
               </p>
               <p className="text-sm text-muted-foreground mt-2">
                 App ID: {app.id} | Type: {widget?.type}
