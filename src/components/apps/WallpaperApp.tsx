@@ -285,8 +285,8 @@ export default function WallpaperApp({
             <span>{filteredWallpapers.length} wallpapers available</span>
             {previewMode && selectedWallpaper !== currentWallpaper && (
               <span className="text-blue-600 font-medium">
-                👁️ Previewing "
-                {wallpapers.find((w) => w.id === selectedWallpaper)?.name}" -
+                👁️ Previewing
+                {wallpapers.find((w) => w.id === selectedWallpaper)?.name} -
                 Click Apply to set permanently
               </span>
             )}
