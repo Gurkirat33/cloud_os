@@ -1,7 +1,17 @@
+"use client";
+
 import { Widget, widgets } from "@/data/widgets";
 import { Folder } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { openApp } from "@/lib/store";
 
 export default function AppWidgets() {
+  const dispatch = useDispatch();
+
+  const handleAppClick = (appId: string) => {
+    dispatch(openApp(appId));
+  };
+
   const getFileIcon = (widget: Widget) => {
     if (widget.type === "folder") {
       return (
@@ -31,6 +41,7 @@ export default function AppWidgets() {
           <div
             key={widget.id}
             className="w-24 h-24 p-1 cursor-pointer hover:bg-blue-50/30 hover:border  rounded-lg flex flex-col items-center justify-center gap-2 transition-all duration-200 group"
+            onClick={() => handleAppClick(widget.id)}
           >
             <div className="flex items-center justify-center group-hover:scale-105 transition-transform">
               {getFileIcon(widget)}

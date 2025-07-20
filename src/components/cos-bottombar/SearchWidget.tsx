@@ -1,143 +1,72 @@
 "use client";
 
-import { Search, Power, User, Folder } from "lucide-react";
+import { Search } from "lucide-react";
 import { useState, useRef } from "react";
-import { Widget, widgets } from "@/data/widgets";
-import { useSession } from "next-auth/react";
+import SearchModal from "./SearchModal";
+import { RootState, restoreApp, toggleMinimizeApp } from "@/lib/store";
+import { useSelector, useDispatch } from "react-redux";
+import { widgets } from "@/data/widgets";
 
 export default function SearchWidget() {
-  const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
   const searchRef = useRef<HTMLDivElement>(null);
+  const dispatch = useDispatch();
 
-  const filteredWidgets = widgets.filter((widget) =>
-    widget.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const openApps = useSelector((state: RootState) => state.app.openApps);
 
-  const displayWidgets = searchTerm ? filteredWidgets : widgets;
+  // Get widgets for open apps
+  const openAppWidgets = openApps
+    .map((app) => ({
+      ...app,
+      widget: widgets.find((widget) => widget.id === app.id),
+    }))
+    .filter((item) => item.widget); // Only include apps that have corresponding widgets
 
-  const getFileIcon = (widget: Widget) => {
-    if (widget.type === "folder") {
-      return (
-        <div className="relative">
-          <Folder className="w-8 h-8 text-yellow-400" fill="currentColor" />
-          <div className="absolute inset-0 w-8 h-8 opacity-20">
-            <Folder className="w-8 h-8 text-yellow-600" />
-          </div>
-        </div>
-      );
+  const handleAppClick = (appId: string, isMinimized: boolean) => {
+    if (isMinimized) {
+      // If minimized, restore it
+      dispatch(restoreApp(appId));
+    } else {
+      // If active, minimize it
+      dispatch(toggleMinimizeApp(appId));
     }
-
-    return (
-      <div className="w-8 h-8 flex items-center justify-center bg-white rounded-sm border border-gray-300 shadow-sm">
-        {widget.icon}
-      </div>
-    );
   };
 
   return (
     <div className="relative" ref={searchRef}>
-      <div
-        className="flex items-center bg-muted/80 backdrop-blur-sm rounded-md px-3 py-2 min-w-72 cursor-text hover:bg-muted transition-all duration-200 border border-border"
-        onClick={() => setIsOpen(true)}
-      >
-        <Search className="w-4 h-4 text-muted-foreground mr-2" />
-        <span className="text-foreground text-sm select-none">
-          Search for apps, settings, and documents
-        </span>
+      <div className="flex gap-2 items-center">
+        <div
+          className="flex items-center bg-muted/80 backdrop-blur-sm rounded-md px-3 py-2 min-w-72 cursor-text hover:bg-muted transition-all duration-200 border border-border"
+          onClick={() => setIsOpen(true)}
+        >
+          <Search className="w-4 h-4 text-muted-foreground mr-2" />
+          <span className="text-foreground text-sm select-none">
+            Search for apps, settings, and documents
+          </span>
+        </div>
+
+        {openAppWidgets.map((item) => (
+          <div
+            key={item.id}
+            className={`
+              bg-muted/80 backdrop-blur-sm rounded-md px-2 py-1.5 cursor-pointer transition-all duration-200 border flex items-center gap-2 min-w-fit
+              ${
+                item.isMinimized
+                  ? "border-border hover:bg-muted opacity-70"
+                  : "border-primary/50 bg-primary/10 hover:bg-primary/20 shadow-sm"
+              }
+            `}
+            onClick={() => handleAppClick(item.id, item.isMinimized)}
+            title={`${item.isMinimized ? "Restore" : "Minimize"} ${
+              item.widget?.title
+            }`}
+          >
+            <span className="flex-shrink-0 text-sm">{item.widget?.icon}</span>
+          </div>
+        ))}
       </div>
 
-      {isOpen && (
-        <>
-          <div
-            className="fixed inset-0 z-40"
-            onClick={() => setIsOpen(false)}
-          />
-
-          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-[600px] bg-background/95 backdrop-blur-xl rounded-lg border border-border shadow-2xl z-50 overflow-hidden">
-            <div className="p-4 border-b border-border">
-              <div className="flex items-center bg-muted/50 rounded-md px-3 py-2 border border-border">
-                <Search className="w-4 h-4 text-muted-foreground mr-2" />
-                <input
-                  type="text"
-                  placeholder="Search for apps, settings, and documents"
-                  className="bg-transparent text-foreground text-sm outline-none flex-1 placeholder-muted-foreground"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  autoFocus
-                />
-              </div>
-            </div>
-
-            {/* Content */}
-            <div className="p-4">
-              {/* Section Header */}
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-foreground text-sm font-medium">
-                  {searchTerm
-                    ? `Results (${filteredWidgets.length})`
-                    : "Widgets"}
-                </h3>
-                {!searchTerm && (
-                  <button className="text-primary hover:text-primary/80 text-sm transition-colors">
-                    All
-                  </button>
-                )}
-              </div>
-
-              {/* Apps Grid */}
-              <div className="max-h-80 overflow-y-auto custom-scrollbar">
-                {displayWidgets.length > 0 ? (
-                  <div className="grid grid-cols-6 gap-3">
-                    {displayWidgets.map((widget) => (
-                      <div
-                        key={widget.id}
-                        className="flex flex-col items-center p-3 hover:bg-accent rounded-lg cursor-pointer transition-all duration-200 group"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        <div className="w-10 h-10 flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
-                          {getFileIcon(widget)}
-                        </div>
-                        <span className="text-foreground text-xs text-center truncate w-full leading-tight">
-                          {widget.title}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-8 text-muted-foreground">
-                    <Search className="w-12 h-12 mx-auto mb-3 opacity-40" />
-                    <p className="mb-1">No results found</p>
-                    <p className="text-sm">Try a different search term</p>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Footer */}
-            <div className="p-3 border-t border-border bg-muted/30 flex items-center justify-between">
-              {/* User Profile */}
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 bg-primary rounded-full flex items-center justify-center">
-                  <User className="w-4 h-4 text-primary-foreground" />
-                </div>
-                <span className="text-foreground text-sm">
-                  {session?.user?.name}
-                </span>
-              </div>
-
-              {/* Power Button */}
-              <button
-                className="p-1.5 hover:bg-accent rounded-md transition-colors group"
-                title="Power options"
-              >
-                <Power className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
-              </button>
-            </div>
-          </div>
-        </>
-      )}
+      <SearchModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </div>
   );
 }
