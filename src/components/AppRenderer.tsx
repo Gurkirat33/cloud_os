@@ -8,6 +8,8 @@ import { widgets } from "@/data/widgets";
 import SettingsApp from "./apps/SettingsApp";
 import MailApp from "./apps/MailApp";
 import BrowserApp from "./apps/BrowserApp";
+import CalculatorApp from "./apps/CalculatorApp";
+import WallpaperApp from "./apps/WallpaperApp";
 
 // Component mapping based on widget ID
 const getAppComponent = (widgetId: string) => {
@@ -23,6 +25,10 @@ const getAppComponent = (widgetId: string) => {
       return MailApp;
     case "Browser.exe":
       return BrowserApp;
+    case "Calculator.exe":
+      return CalculatorApp;
+    case "Wallpaper.exe":
+      return WallpaperApp;
     // Add more cases as you create more app components
     default:
       return null;

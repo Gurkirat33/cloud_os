@@ -25,6 +25,8 @@ import {
   Image,
   Video,
   Archive,
+  Calculator,
+  Palette,
 } from "lucide-react";
 
 export const widgets = [
@@ -153,6 +155,18 @@ export const widgets = [
     title: "Temp",
     icon: <Folder className="text-orange-400" />,
     type: "folder",
+  },
+  {
+    id: "22",
+    title: "Calculator.exe",
+    icon: <Calculator className="text-blue-600" />,
+    type: "exe",
+  },
+  {
+    id: "23",
+    title: "Wallpaper.exe",
+    icon: <Palette className="text-purple-600" />,
+    type: "exe",
   },
 ];
 
