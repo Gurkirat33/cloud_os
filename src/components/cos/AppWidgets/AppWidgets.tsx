@@ -1,8 +1,8 @@
-import { widgets } from "@/data/widgets";
+import { Widget, widgets } from "@/data/widgets";
 import { Folder } from "lucide-react";
 
 export default function AppWidgets() {
-  const getFileIcon = (widget: any) => {
+  const getFileIcon = (widget: Widget) => {
     if (widget.type === "folder") {
       return (
         <div className="relative">

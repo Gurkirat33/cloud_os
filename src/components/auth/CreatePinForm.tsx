@@ -7,8 +7,10 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { createPin } from "@/lib/actions/user-actions";
 import { useRouter } from "next/navigation";
+import { User } from "next-auth";
 
-export default function CreatePinForm({ user }: { user: any }) {
+export default function CreatePinForm({ user }: { user: User }) {
+  console.log("user is", user);
   const router = useRouter();
   const { update } = useSession();
   const [data, action] = useActionState(createPin, {

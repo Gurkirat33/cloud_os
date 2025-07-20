@@ -155,3 +155,10 @@ export const widgets = [
     type: "folder",
   },
 ];
+
+export interface Widget {
+  id: string;
+  title: string;
+  icon: React.ReactNode;
+  type: string;
+}

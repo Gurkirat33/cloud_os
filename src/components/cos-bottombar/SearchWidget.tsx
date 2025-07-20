@@ -2,7 +2,7 @@
 
 import { Search, Power, User, Folder } from "lucide-react";
 import { useState, useRef } from "react";
-import { widgets } from "@/data/widgets";
+import { Widget, widgets } from "@/data/widgets";
 import { useSession } from "next-auth/react";
 
 export default function SearchWidget() {
@@ -17,7 +17,7 @@ export default function SearchWidget() {
 
   const displayWidgets = searchTerm ? filteredWidgets : widgets;
 
-  const getFileIcon = (widget: any) => {
+  const getFileIcon = (widget: Widget) => {
     if (widget.type === "folder") {
       return (
         <div className="relative">
@@ -29,7 +29,6 @@ export default function SearchWidget() {
       );
     }
 
-    // Return the appropriate icon with Windows-like styling
     return (
       <div className="w-8 h-8 flex items-center justify-center bg-white rounded-sm border border-gray-300 shadow-sm">
         {widget.icon}

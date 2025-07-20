@@ -1,7 +1,8 @@
 import { Shield } from "lucide-react";
+import { User } from "next-auth";
 import React from "react";
 
-export default function EnterPinForm({ user }: { user: any }) {
+export default function EnterPinForm({ user }: { user: User }) {
   return (
     <div className="w-full max-w-md mx-auto">
       <div className="text-center mb-8">
