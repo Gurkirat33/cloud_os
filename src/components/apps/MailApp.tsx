@@ -6,13 +6,17 @@ import WindowContainer from "../ui/WindowContainer";
 interface AppProps {
   onClose: () => void;
   onMinimize?: () => void;
+  onFocus?: () => void;
   isMinimized?: boolean;
+  zIndex?: number;
 }
 
 export default function MailApp({
   onClose,
   onMinimize,
+  onFocus,
   isMinimized = false,
+  zIndex = 50,
 }: AppProps) {
   return (
     <WindowContainer
@@ -20,7 +24,9 @@ export default function MailApp({
       icon={<Mail className="w-4 h-4 text-blue-600" />}
       onClose={onClose}
       onMinimize={onMinimize}
+      onFocus={onFocus}
       isMinimized={isMinimized}
+      zIndex={zIndex}
       defaultWidth={900}
       defaultHeight={600}
     >

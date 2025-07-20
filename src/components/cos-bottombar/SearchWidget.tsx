@@ -3,7 +3,7 @@
 import { Search } from "lucide-react";
 import { useState, useRef } from "react";
 import SearchModal from "./SearchModal";
-import { RootState, restoreApp, toggleMinimizeApp } from "@/lib/store";
+import { RootState, focusApp, toggleMinimizeApp } from "@/lib/store";
 import { useSelector, useDispatch } from "react-redux";
 import { widgets } from "@/data/widgets";
 
@@ -24,8 +24,8 @@ export default function SearchWidget() {
 
   const handleAppClick = (appId: string, isMinimized: boolean) => {
     if (isMinimized) {
-      // If minimized, restore it
-      dispatch(restoreApp(appId));
+      // If minimized, restore and bring to front
+      dispatch(focusApp(appId));
     } else {
       // If active, minimize it
       dispatch(toggleMinimizeApp(appId));
@@ -45,6 +45,7 @@ export default function SearchWidget() {
           </span>
         </div>
 
+        {/* Open Apps Taskbar */}
         {openAppWidgets.map((item) => (
           <div
             key={item.id}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSelector, useDispatch } from "react-redux";
-import { RootState, closeApp, toggleMinimizeApp } from "@/lib/store";
+import { RootState, closeApp, toggleMinimizeApp, focusApp } from "@/lib/store";
 import { widgets } from "@/data/widgets";
 
 // Import app components
@@ -41,6 +41,10 @@ export default function AppRenderer() {
     dispatch(toggleMinimizeApp(appId));
   };
 
+  const handleFocusApp = (appId: string) => {
+    dispatch(focusApp(appId));
+  };
+
   return (
     <>
       {openApps.map((app) => {
@@ -52,7 +56,8 @@ export default function AppRenderer() {
           return (
             <div
               key={app.id}
-              className="fixed inset-4 bg-background border border-border rounded-lg shadow-2xl z-50 p-6"
+              className="fixed inset-4 bg-background border border-border rounded-lg shadow-2xl p-6"
+              style={{ zIndex: app.zIndex }}
             >
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-bold">
@@ -80,7 +85,9 @@ export default function AppRenderer() {
             key={app.id}
             onClose={() => handleCloseApp(app.id)}
             onMinimize={() => handleMinimizeApp(app.id)}
+            onFocus={() => handleFocusApp(app.id)}
             isMinimized={app.isMinimized}
+            zIndex={app.zIndex}
           />
         );
       })}
