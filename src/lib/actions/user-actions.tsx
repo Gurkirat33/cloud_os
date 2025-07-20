@@ -41,6 +41,7 @@ export async function signupUser(prevState: unknown, formData: FormData) {
     });
 
     return { success: true, message: "User created successfully" };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     if (isRedirectError(error)) {
       throw error;
@@ -66,7 +67,8 @@ export async function signInUser(prevState: unknown, formData: FormData) {
       password,
       redirectTo: "/pin",
     });
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
     if (isRedirectError(error)) {
       throw error;
     }
@@ -104,6 +106,7 @@ export async function createPin(prevState: unknown, formData: FormData) {
       message: "PIN created successfully",
       pin: hashedPin,
     };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     if (isRedirectError(error)) {
       throw error;
