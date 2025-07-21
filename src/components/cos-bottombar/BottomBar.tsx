@@ -5,7 +5,7 @@ import TimeWidget from "./TimeWidget";
 
 export default function BottomBar() {
   return (
-    <div className="px-3 py-1.5 absolute bottom-0 w-full flex items-center justify-between bg-background">
+    <div className="fixed bottom-0 left-0 right-0 px-3 py-1.5 w-full flex items-center justify-between bg-background border-t border-border z-40">
       {/* Left: Weather Widget */}
       <div className="flex items-center">
         <Suspense fallback={<div>Loading...</div>}>

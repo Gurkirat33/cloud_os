@@ -27,6 +27,9 @@ import {
   Archive,
   Calculator,
   Palette,
+  CheckSquare,
+  Terminal,
+  Gamepad2,
 } from "lucide-react";
 
 export const widgets = [
@@ -166,6 +169,30 @@ export const widgets = [
     id: "23",
     title: "Wallpaper.exe",
     icon: <Palette className="text-purple-600" />,
+    type: "exe",
+  },
+  {
+    id: "24",
+    title: "TodoList.exe",
+    icon: <CheckSquare className="text-green-600" />,
+    type: "exe",
+  },
+  {
+    id: "25",
+    title: "Notepad.exe",
+    icon: <FileText className="text-blue-600" />,
+    type: "exe",
+  },
+  {
+    id: "26",
+    title: "Terminal.exe",
+    icon: <Terminal className="text-green-500" />,
+    type: "exe",
+  },
+  {
+    id: "27",
+    title: "Snake.exe",
+    icon: <Gamepad2 className="text-green-600" />,
     type: "exe",
   },
 ];

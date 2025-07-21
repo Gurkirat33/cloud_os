@@ -10,6 +10,10 @@ import MailApp from "./apps/MailApp";
 import BrowserApp from "./apps/BrowserApp";
 import CalculatorApp from "./apps/CalculatorApp";
 import WallpaperApp from "./apps/WallpaperApp";
+import TodoApp from "./apps/TodoApp";
+import NotepadApp from "./apps/NotepadApp";
+import TerminalApp from "./apps/TerminalApp";
+import SnakeGameApp from "./apps/SnakeGameApp";
 
 // Component mapping based on widget ID
 const getAppComponent = (widgetId: string) => {
@@ -29,6 +33,14 @@ const getAppComponent = (widgetId: string) => {
       return CalculatorApp;
     case "Wallpaper.exe":
       return WallpaperApp;
+    case "TodoList.exe":
+      return TodoApp;
+    case "Notepad.exe":
+      return NotepadApp;
+    case "Terminal.exe":
+      return TerminalApp;
+    case "Snake.exe":
+      return SnakeGameApp;
     // Add more cases as you create more app components
     default:
       return null;
