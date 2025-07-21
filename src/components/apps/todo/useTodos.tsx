@@ -12,6 +12,7 @@ export function useTodos() {
     if (savedTodos) {
       const parsed = JSON.parse(savedTodos);
       setTodos(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         parsed.map((todo: any) => ({
           ...todo,
           createdAt: new Date(todo.createdAt),

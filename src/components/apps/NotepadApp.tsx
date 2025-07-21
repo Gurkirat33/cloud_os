@@ -37,7 +37,7 @@ export default function NotepadApp({
     if (savedNotes) {
       const parsed = JSON.parse(savedNotes);
       setNotes(
-        parsed.map((note: any) => ({
+        parsed.map((note: Note) => ({
           ...note,
           lastModified: new Date(note.lastModified),
         }))
