@@ -147,6 +147,7 @@ export const widgets = [
     icon: <Folder className="text-red-500" />,
     type: "folder",
   },
+
   {
     id: "20",
     title: "System",
@@ -193,6 +194,12 @@ export const widgets = [
     id: "27",
     title: "Snake.exe",
     icon: <Gamepad2 className="text-green-600" />,
+    type: "exe",
+  },
+  {
+    id: "28",
+    title: "Weather.exe",
+    icon: <SunMoon className="text-blue-500" />,
     type: "exe",
   },
 ];

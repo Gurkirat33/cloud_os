@@ -14,8 +14,9 @@ import TodoApp from "./apps/TodoApp";
 import NotepadApp from "./apps/NotepadApp";
 import TerminalApp from "./apps/TerminalApp";
 import SnakeGameApp from "./apps/SnakeGameApp";
+import WeatherApp from "./apps/WeatherApp";
+import ReadmeApp from "./apps/ReadmeApp";
 
-// Component mapping based on widget ID
 const getAppComponent = (widgetId: string) => {
   const widget = widgets.find((w) => w.id === widgetId);
 
@@ -41,6 +42,10 @@ const getAppComponent = (widgetId: string) => {
       return TerminalApp;
     case "Snake.exe":
       return SnakeGameApp;
+    case "Weather.exe":
+      return WeatherApp;
+    case "readme.md":
+      return ReadmeApp;
     // Add more cases as you create more app components
     default:
       return null;
