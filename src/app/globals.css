@@ -156,3 +156,34 @@
 .custom-scrollbar::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradient var(--animation-duration, 8s) linear infinite;
+}
+
+.animate-gradient-fast {
+  --animation-duration: 3s;
+  animation: gradient var(--animation-duration) linear infinite;
+}
+
+.animate-gradient-slow {
+  --animation-duration: 12s;
+  animation: gradient var(--animation-duration) linear infinite;
+}
+
+.gradient-bg {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+}
