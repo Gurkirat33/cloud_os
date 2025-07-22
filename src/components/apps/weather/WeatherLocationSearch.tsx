@@ -39,14 +39,16 @@ export default function WeatherLocationSearch({
 
       if (response.ok) {
         const data = await response.json();
-        const locations: WeatherLocation[] = data.map((item: any) => ({
-          id: `${item.lat}-${item.lon}`,
-          name: item.name,
-          region: item.region,
-          country: item.country,
-          lat: item.lat,
-          lon: item.lon,
-        }));
+        const locations: WeatherLocation[] = data.map(
+          (item: WeatherLocation) => ({
+            id: `${item.lat}-${item.lon}`,
+            name: item.name,
+            region: item.region,
+            country: item.country,
+            lat: item.lat,
+            lon: item.lon,
+          })
+        );
         setSearchResults(locations);
         setShowResults(locations.length > 0);
       }

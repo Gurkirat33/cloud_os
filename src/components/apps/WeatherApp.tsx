@@ -358,8 +358,8 @@ export default function WeatherApp({
                     Manage Locations
                   </h3>
                   <p className="text-muted-foreground text-sm mb-4">
-                    Click "Locations" to view and manage your saved weather
-                    locations.
+                    Click &quot;Locations&quot; to view and manage your saved
+                    weather locations.
                   </p>
                   <Button
                     variant="outline"
