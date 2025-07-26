@@ -318,7 +318,7 @@ export default function WindowContainer({
     <div
       ref={windowRef}
       style={getWindowStyles()}
-      className={`bg-background border border-border rounded-lg shadow-2xl overflow-hidden relative ${
+      className={`bg-background border border-border rounded-lg shadow-2xl overflow-x-hidden overflow-y-scroll relative ${
         isDragging || isResizing ? "shadow-3xl" : ""
       }`}
       onClick={handleWindowClick}

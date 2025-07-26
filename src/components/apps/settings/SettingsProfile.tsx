@@ -1,27 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { User, Mail, Calendar, Edit3, Save, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { User, Mail, Calendar } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { useSession } from "next-auth/react";
 
 export default function SettingsProfile() {
   const { data: session } = useSession();
-  const [isEditing, setIsEditing] = useState(false);
-  const [displayName, setDisplayName] = useState(session?.user?.name || "");
-
-  const handleSave = () => {
-    // In a real app, you'd save to backend/localStorage
-    setIsEditing(false);
-    // Could dispatch to update global state or localStorage
-  };
-
-  const handleCancel = () => {
-    setDisplayName(session?.user?.name || "");
-    setIsEditing(false);
-  };
 
   const formatJoinDate = () => {
     // Mock join date - in real app this would come from user data
@@ -58,44 +42,11 @@ export default function SettingsProfile() {
               </span>
             </div>
 
-            {isEditing ? (
-              <div className="flex items-center gap-2">
-                <Input
-                  value={displayName}
-                  onChange={(e) => setDisplayName(e.target.value)}
-                  className="max-w-64"
-                  placeholder="Enter your name"
-                />
-                <Button size="sm" onClick={handleSave} className="gap-1">
-                  <Save className="w-3 h-3" />
-                  Save
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={handleCancel}
-                  className="gap-1"
-                >
-                  <X className="w-3 h-3" />
-                  Cancel
-                </Button>
-              </div>
-            ) : (
-              <div className="flex items-center gap-2">
-                <h3 className="text-lg font-semibold text-foreground">
-                  {session?.user?.name || "User"}
-                </h3>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={() => setIsEditing(true)}
-                  className="gap-1"
-                >
-                  <Edit3 className="w-3 h-3" />
-                  Edit
-                </Button>
-              </div>
-            )}
+            <div className="flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-foreground">
+                {session?.user?.name || "User"}
+              </h3>
+            </div>
           </div>
         </div>
       </div>

@@ -34,12 +34,6 @@ import {
 
 export const widgets = [
   {
-    id: "1",
-    title: "Weather",
-    icon: <Folder className="text-yellow-500" />,
-    type: "folder",
-  },
-  {
     id: "2",
     title: "Calendar",
     icon: <Folder className="text-yellow-500" />,

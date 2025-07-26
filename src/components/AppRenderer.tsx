@@ -16,13 +16,13 @@ import TerminalApp from "./apps/TerminalApp";
 import SnakeGameApp from "./apps/SnakeGameApp";
 import WeatherApp from "./apps/WeatherApp";
 import ReadmeApp from "./apps/ReadmeApp";
+import CameraApp from "./apps/CameraApp";
 
 const getAppComponent = (widgetId: string) => {
   const widget = widgets.find((w) => w.id === widgetId);
 
   if (!widget) return null;
 
-  // Map widget titles to their corresponding app components
   switch (widget.title) {
     case "Settings.exe":
       return SettingsApp;
@@ -44,6 +44,8 @@ const getAppComponent = (widgetId: string) => {
       return SnakeGameApp;
     case "Weather.exe":
       return WeatherApp;
+    case "Camera.exe":
+      return CameraApp;
     case "readme.md":
       return ReadmeApp;
     // Add more cases as you create more app components
